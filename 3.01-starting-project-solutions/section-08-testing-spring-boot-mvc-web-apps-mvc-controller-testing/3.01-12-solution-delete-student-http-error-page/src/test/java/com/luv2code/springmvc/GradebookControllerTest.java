@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.ModelAndViewAssert;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -36,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 public class GradebookControllerTest {
 
-    private static MockHttpServletRequest request;
+    // private static MockHttpServletRequest request; // MockHttpServletRequest is a fake HTTP request object used in testing. It simulates request parameters, headers, and attributes without needing a real HTTP request.
 
     @Autowired
     private JdbcTemplate jdbc;
@@ -52,10 +53,10 @@ public class GradebookControllerTest {
 
     @BeforeAll
     public static void setup() {
-        request = new MockHttpServletRequest();
-        request.setParameter("firstname", "Chad");
-        request.setParameter("lastname", "Darby");
-        request.setParameter("emailAddress", "chad.darby@luv2code_school.com");
+//        request = new MockHttpServletRequest();
+//        request.setParameter("firstname", "Chad");
+//        request.setParameter("lastname", "Darby");
+//        request.setParameter("emailAddress", "chad.darby@luv2code_school.com");
     }
 
     @BeforeEach
@@ -101,11 +102,20 @@ public class GradebookControllerTest {
         assertIterableEquals(collegeStudentList, studentCreateServiceMock.getGradebook());
 
         MvcResult mvcResult = this.mockMvc.perform(post("/")
-                .contentType(MediaType.APPLICATION_JSON)
-                .param("firstname", request.getParameterValues("firstname"))
-                .param("lastname", request.getParameterValues("lastname"))
-                .param("emailAddress", request.getParameterValues("emailAddress")))
-                .andExpect(status().isOk()).andReturn();
+            .contentType(MediaType.APPLICATION_JSON)
+            .param("firstname", "Chad")
+            .param("lastname", "Darby")
+            .param("emailAddress", "chad.darby@luv2code_school.com"))
+          .andExpect(status().isOk()).andReturn();
+
+//        MvcResult mvcResult = this.mockMvc.perform(post("/")
+//            ]]]    .contentType(MediaType.APPLICATION_JSON)
+//                .param("firstname", request.getParameterValues("firstname"))
+//                .param("lastname", request.getParameterValues("lastname"))
+//                .param("emailAddress", request.getParameterValues("emailAddress")))
+//                .andExpect(status().isOk()).andReturn();
+
+
 
         ModelAndView mav = mvcResult.getModelAndView();
 

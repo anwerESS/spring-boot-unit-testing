@@ -1,0 +1,135 @@
+@startuml
+class com.luv2code.springmvc.models.GradebookCollegeStudent {
+- int id
+- StudentGrades studentGrades
++ StudentGrades getStudentGrades()
++ void setStudentGrades(StudentGrades)
++ int getId()
++ void setId(int)
+}
+
+
+class com.luv2code.springmvc.ServletInitializer {
+# SpringApplicationBuilder configure(SpringApplicationBuilder)
+}
+
+interface com.luv2code.springmvc.models.Grade {
+~ double getGrade()
+~ int getId()
+~ void setId(int)
+~ int getStudentId()
+~ void setStudentId(int)
+~ void setGrade(double)
+}
+
+interface com.luv2code.springmvc.models.Student {
+~ String studentInformation()
+~ String getFullName()
+}
+
+class com.luv2code.springmvc.models.Gradebook {
+- List<GradebookCollegeStudent> students
++ List<GradebookCollegeStudent> getStudents()
++ void setStudents(List<GradebookCollegeStudent>)
+}
+
+
+class com.luv2code.springmvc.models.HistoryGrade {
+- int id
+- int studentId
+- double grade
++ int getId()
++ void setId(int)
++ int getStudentId()
++ void setStudentId(int)
++ double getGrade()
++ void setGrade(double)
+}
+
+
+class com.luv2code.springmvc.models.StudentGrades {
+- List<Grade> mathGradeResults
+- List<Grade> scienceGradeResults
+- List<Grade> historyGradeResults
++ double addGradeResultsForSingleClass(List<Grade>)
++ double findGradePointAverage(List<Grade>)
++ List<Grade> getMathGradeResults()
++ void setMathGradeResults(List<Grade>)
++ List<Grade> getScienceGradeResults()
++ void setScienceGradeResults(List<Grade>)
++ List<Grade> getHistoryGradeResults()
++ void setHistoryGradeResults(List<Grade>)
++ String toString()
+}
+
+
+class com.luv2code.springmvc.controller.GradebookController {
+- Gradebook gradebook
++ String getStudents(Model)
++ String studentInformation(int,Model)
+}
+
+
+class com.luv2code.springmvc.models.MathGrade {
+- int id
+- int studentId
+- double grade
++ int getId()
++ void setId(int)
++ int getStudentId()
++ void setStudentId(int)
++ double getGrade()
++ void setGrade(double)
+}
+
+
+class com.luv2code.springmvc.models.CollegeStudent {
+- int id
+- String firstname
+- String lastname
+- String emailAddress
++ int getId()
++ void setId(int)
++ String getFirstname()
++ void setFirstname(String)
++ String getLastname()
++ void setLastname(String)
++ String getEmailAddress()
++ void setEmailAddress(String)
++ String getFullName()
++ String toString()
++ String studentInformation()
+}
+
+
+class com.luv2code.springmvc.MvcTestingExampleApplication {
++ {static} void main(String[])
+~ CollegeStudent getCollegeStudent()
+~ Grade getMathGrade(double)
+~ MathGrade getGrade()
+~ ScienceGrade getScienceGrade()
+~ HistoryGrade getHistoryGrade()
+}
+
+class com.luv2code.springmvc.models.ScienceGrade {
+- int id
+- int studentId
+- double grade
++ int getId()
++ void setId(int)
++ int getStudentId()
++ void setStudentId(int)
++ double getGrade()
++ void setGrade(double)
+}
+
+
+
+
+com.luv2code.springmvc.models.CollegeStudent <|-- com.luv2code.springmvc.models.GradebookCollegeStudent
+org.springframework.boot.web.servlet.support.SpringBootServletInitializer <|-- com.luv2code.springmvc.ServletInitializer
+com.luv2code.springmvc.models.Grade <|.. com.luv2code.springmvc.models.HistoryGrade
+com.luv2code.springmvc.models.Grade <|.. com.luv2code.springmvc.models.MathGrade
+com.luv2code.springmvc.models.Student <|.. com.luv2code.springmvc.models.CollegeStudent
+com.luv2code.springmvc.models.Grade <|.. com.luv2code.springmvc.models.ScienceGrade
+@enduml

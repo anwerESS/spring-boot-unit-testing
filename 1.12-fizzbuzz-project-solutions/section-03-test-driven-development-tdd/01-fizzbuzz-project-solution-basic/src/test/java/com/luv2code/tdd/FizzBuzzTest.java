@@ -15,6 +15,7 @@ class FizzBuzzTest {
     @Test
     @Order(1)
     void testForDivisibleByThree() {
+        fail("");
 
         String expected = "Fizz";
 
